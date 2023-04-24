@@ -2,6 +2,7 @@ package example
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 )
 
@@ -28,9 +29,11 @@ func CountryStateCity(country string, state string, city string) string {
 	decoder.Decode(&country_state_city)
 
 	for _, country_model := range country_state_city {
-
+fmt.Println("gh")
 		if country == country_model.Country_Name {
+			fmt.Println("kl")
 			for currentIndex, state_city := range country_model.StateCity {
+				fmt.Println("kkk")
 				if state_city.State == "" && len(state_city.Cities) == 0 {
 					if state != "" || city != "" {
 						return "This Country has no state & city"
