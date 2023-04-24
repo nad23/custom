@@ -36,7 +36,7 @@ func CountryStateCity(country string, state string, city string) string {
 						return "This Country has no state & city"
 					}
 					if state == "" || city == "" {
-						return ""
+						return "1"
 					}
 				}
 				if len(state_city.State) != 0 && state == "" {
@@ -51,7 +51,7 @@ func CountryStateCity(country string, state string, city string) string {
 					}
 					for _, city_name := range state_city.Cities {
 						if city_name == city {
-							return ""
+							return "2"
 						}
 					}
 					return "Invalid city"
@@ -64,7 +64,7 @@ func CountryStateCity(country string, state string, city string) string {
 			}
 		}
 	}
-	return ""
+	return "3"
 }
 
 type State_City struct {
