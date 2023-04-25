@@ -38,6 +38,7 @@ func CountryStateCity(country string, state string, city string) string {
 	// decoder := json.NewDecoder(file)
 	var country_state_city []Final_Model
 	// err = decoder.Decode(&country_state_city)
+	return string(countriesData)
 	err = json.Unmarshal(countriesData, &country_state_city)
 	if err != nil {
 
