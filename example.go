@@ -21,7 +21,7 @@ type Person struct {
 }
 
 func CountryStateCity(country string, state string, city string) string {
-	file, err := os.Open("countries-states-cities.json")
+	file, err := os.Open("./countries-states-cities.json")
 	if err != nil {
        
         return err.Error()+"  1"
