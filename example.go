@@ -20,13 +20,20 @@ type Person struct {
 	Age  int
 }
 
-func CountryStateCity(country string, state string, city string) []Final_Model {
-	file, _ := os.Open("countries-states-cities.json")
+func CountryStateCity(country string, state string, city string) string {
+	file, err := os.Open("countries-states-cities.json")
+	if err != nil {
+       
+        return err.Error()+"  1"
+    }
 	defer file.Close()
 	decoder := json.NewDecoder(file)
 	var country_state_city []Final_Model
-	decoder.Decode(&country_state_city)
-
+	err=decoder.Decode(&country_state_city)
+	if err != nil {
+       
+        return err.Error() + " 2"
+    }
 	// for _, country_model := range country_state_city {
 
 	// 	if country == country_model.Country_Name {
@@ -66,7 +73,7 @@ func CountryStateCity(country string, state string, city string) []Final_Model {
 	// 		}
 	// 	}
 	// }
-	return country_state_city
+	return "country_state_city"
 }
 
 type State_City struct {
