@@ -1,8 +1,10 @@
 package example
 
 import (
-	"embed"
 	"encoding/json"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
 
 func Add(a int, b int) int {
@@ -21,17 +23,22 @@ type Person struct {
 }
 
 func CountryStateCity(country string, state string, city string) string {
-	var countriesFile embed.FS
-	file, err := countriesFile.ReadFile("countries-states-cities.json")
-	if err != nil {
 
+	files, err := http.Get("https://github.com//nad23/custompackagesknvnknk/main/countries-states-cities.json")
+	defer files.Body.Close()
+	if err != nil {
 		return err.Error() + "  1"
 	}
+	countriesData, err := ioutil.ReadAll(files.Body)
+	if err != nil {
+		log.Fatalf("Error reading response body: %v", err)
+	}
+
 	// defer file.Close()
 	// decoder := json.NewDecoder(file)
 	var country_state_city []Final_Model
 	// err = decoder.Decode(&country_state_city)
-	err = json.Unmarshal(file, &country_state_city)
+	err = json.Unmarshal(countriesData, &country_state_city)
 	if err != nil {
 
 		return err.Error() + " 2"
