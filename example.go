@@ -1,8 +1,8 @@
 package example
 
 import (
+	"embed"
 	"encoding/json"
-	"io/ioutil"
 )
 
 func Add(a int, b int) int {
@@ -21,7 +21,8 @@ type Person struct {
 }
 
 func CountryStateCity(country string, state string, city string) string {
-	file, err := ioutil.ReadFile("countries-states-cities.json")
+	var countriesFile embed.FS
+	file, err := countriesFile.ReadFile("countries-states-cities.json")
 	if err != nil {
 
 		return err.Error() + "  1"
