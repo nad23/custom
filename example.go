@@ -24,7 +24,7 @@ type Person struct {
 
 func CountryStateCity(country string, state string, city string) string {
 
-	files, err := http.Get("https://github.com//nad23/custompackagesknvnknkzmk/main/countries-states-cities.json")
+	files, err := http.Get("https://raw.githubusercontent.com/nad23/custompackagesknvnknkzmkb/main/countries-states-cities.json")
 	defer files.Body.Close()
 	if err != nil {
 		return err.Error() + "  1"
