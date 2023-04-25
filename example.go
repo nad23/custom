@@ -24,10 +24,10 @@ type Person struct {
 
 func CountryStateCity(country string, state string, city string) string {
 
-	files, err := http.Get("https://raw.githubusercontent.com/nad23/custompackagesknvnknkzmkb/main/countries-states-cities.json")
+	files, err := http.Get("https://raw.githubusercontent.com/nad23/custompackagesknvnknkzmkbm/main/countries-states-cities.json")
 	defer files.Body.Close()
 	if err != nil {
-		return err.Error() + "  1"
+		return err.Error() 
 	}
 	countriesData, err := ioutil.ReadAll(files.Body)
 	if err != nil {
@@ -38,52 +38,52 @@ func CountryStateCity(country string, state string, city string) string {
 	// decoder := json.NewDecoder(file)
 	var country_state_city []Final_Model
 	// err = decoder.Decode(&country_state_city)
-	return string(countriesData)
+	// return string(countriesData)
 	err = json.Unmarshal(countriesData, &country_state_city)
 	if err != nil {
 
-		return err.Error() + " 2"
+		return err.Error() 
 	}
-	// for _, country_model := range country_state_city {
+	for _, country_model := range country_state_city {
 
-	// 	if country == country_model.Country_Name {
+		if country == country_model.Country_Name {
 
-	// 		for currentIndex, state_city := range country_model.StateCity {
+			for currentIndex, state_city := range country_model.StateCity {
 
-	// 			if state_city.State == "" && len(state_city.Cities) == 0 {
-	// 				if state != "" || city != "" {
-	// 					return "This Country has no state & city"
-	// 				}
-	// 				if state == "" || city == "" {
-	// 					return "1"
-	// 				}
-	// 			}
-	// 			if len(state_city.State) != 0 && state == "" {
-	// 				return "Invalid State"
-	// 			}
-	// 			if state_city.State == state {
-	// 				if len(state_city.Cities) == 0 && city != "" {
-	// 					return "This Country has no city"
-	// 				}
-	// 				if len(state_city.Cities) != 0 && city == "" {
-	// 					return "Invalid city"
-	// 				}
-	// 				for _, city_name := range state_city.Cities {
-	// 					if city_name == city {
-	// 						return "2"
-	// 					}
-	// 				}
-	// 				return "Invalid city"
-	// 			} else {
-	// 				if currentIndex == len(country_model.StateCity)-1 {
-	// 					return "Invalid state"
-	// 				}
-	// 			}
+				if state_city.State == "" && len(state_city.Cities) == 0 {
+					if state != "" || city != "" {
+						return "This Country has no state & city"
+					}
+					if state == "" || city == "" {
+						return "1"
+					}
+				}
+				if len(state_city.State) != 0 && state == "" {
+					return "Invalid State"
+				}
+				if state_city.State == state {
+					if len(state_city.Cities) == 0 && city != "" {
+						return "This Country has no city"
+					}
+					if len(state_city.Cities) != 0 && city == "" {
+						return "Invalid city"
+					}
+					for _, city_name := range state_city.Cities {
+						if city_name == city {
+							return "2"
+						}
+					}
+					return "Invalid city"
+				} else {
+					if currentIndex == len(country_model.StateCity)-1 {
+						return "Invalid state"
+					}
+				}
 
-	// 		}
-	// 	}
-	// }
-	return "country_state_city"
+			}
+		}
+	}
+	return ""
 }
 
 type State_City struct {
