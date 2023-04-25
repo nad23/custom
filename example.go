@@ -2,7 +2,7 @@ package example
 
 import (
 	"encoding/json"
-	"os"
+	"io/ioutil"
 )
 
 func Add(a int, b int) int {
@@ -21,19 +21,20 @@ type Person struct {
 }
 
 func CountryStateCity(country string, state string, city string) string {
-	file, err := os.Open("./countries-states-cities.json")
+	file, err := ioutil.ReadFile("countries-states-cities.json")
 	if err != nil {
-       
-        return err.Error()+"  1"
-    }
-	defer file.Close()
-	decoder := json.NewDecoder(file)
+
+		return err.Error() + "  1"
+	}
+	// defer file.Close()
+	// decoder := json.NewDecoder(file)
 	var country_state_city []Final_Model
-	err=decoder.Decode(&country_state_city)
+	// err = decoder.Decode(&country_state_city)
+	err = json.Unmarshal(file, &country_state_city)
 	if err != nil {
-       
-        return err.Error() + " 2"
-    }
+
+		return err.Error() + " 2"
+	}
 	// for _, country_model := range country_state_city {
 
 	// 	if country == country_model.Country_Name {
