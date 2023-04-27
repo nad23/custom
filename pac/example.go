@@ -36,9 +36,9 @@ func CountryStateCity(country string, state string, city string) string {
 	// 	return err.Error()
 	// }
 	// Open the JSON file
-	file, err := os.Open("countries-states-cities.json")
+	file, err := os.Open("data.json")
 	if err != nil {
-		return err.Error()+"1"
+		return err.Error()+"11"
 	}
 	defer file.Close()
 	decoder := json.NewDecoder(file)
