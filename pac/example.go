@@ -2,9 +2,10 @@ package example
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"log"
-	"net/http"
+	// "fmt"
+	// "io/ioutil"
+	// "net/http"
+	"os"
 )
 
 func Add(a int, b int) int {
@@ -24,26 +25,31 @@ type Person struct {
 
 func CountryStateCity(country string, state string, city string) string {
 
-	files, err := http.Get("https://raw.githubusercontent.com/nad23/custompackagesknvnknkzmkbm/main/countries-states-cities.json")
-	defer files.Body.Close()
-	if err != nil {
-		return err.Error() 
-	}
-	countriesData, err := ioutil.ReadAll(files.Body)
-	if err != nil {
-		log.Fatalf("Error reading response body: %v", err)
-	}
+	// files, err := http.Get("https://raw.githubusercontent.com/nad23/custompackagesknvnknkzmkbm/main/countries-states-cities.json")
 
-	// defer file.Close()
-	// decoder := json.NewDecoder(file)
+	// if err != nil {
+	// 	return err.Error()
+	// }
+	// defer files.Body.Close()
+	// countriesData, err := ioutil.ReadAll(files.Body)
+	// if err != nil {
+	// 	return err.Error()
+	// }
+	// Open the JSON file
+	file, err := os.Open("countries-states-cities.json")
+	if err != nil {
+		return err.Error()
+	}
+	defer file.Close()
+	decoder := json.NewDecoder(file)
 	var country_state_city []Final_Model
-	// err = decoder.Decode(&country_state_city)
-	// return string(countriesData)
-	err = json.Unmarshal(countriesData, &country_state_city)
-	if err != nil {
+	err = decoder.Decode(&country_state_city)
+	return string(country_state_city[0].Country_Name)
+	// err = json.Unmarshal(countriesData, &country_state_city)
+	// if err != nil {
 
-		return err.Error() 
-	}
+	// 	return err.Error()
+	// }
 	for _, country_model := range country_state_city {
 
 		if country == country_model.Country_Name {
