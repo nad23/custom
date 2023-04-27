@@ -1,4 +1,4 @@
-package example
+package pac
 
 import (
 	"encoding/json"
