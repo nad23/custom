@@ -38,12 +38,15 @@ func CountryStateCity(country string, state string, city string) string {
 	// Open the JSON file
 	file, err := os.Open("countries-states-cities.json")
 	if err != nil {
-		return err.Error()
+		return err.Error()+"1"
 	}
 	defer file.Close()
 	decoder := json.NewDecoder(file)
 	var country_state_city []Final_Model
 	err = decoder.Decode(&country_state_city)
+	if err != nil {
+		return err.Error()+"11"
+	}
 	return string(country_state_city[0].Country_Name)
 	// err = json.Unmarshal(countriesData, &country_state_city)
 	// if err != nil {
